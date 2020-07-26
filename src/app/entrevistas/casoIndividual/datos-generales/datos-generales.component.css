@@ -1,0 +1,60 @@
+object.pdf {
+    min-height: 400px;
+}
+
+input.ng-dirty.ng-invalid {
+    color: red
+}
+
+input.ng-valid[required],
+.ng-valid.required {
+    border-bottom: 1px solid #42A948;
+    /* green */
+    box-shadow: 0 1px 0 0 #42A948;
+    /* black */
+
+}
+
+input.ng-invalid:not(form) {
+    border-bottom: 1px solid #a94442;
+    /* red */
+    box-shadow: 0 1px 0 0 #a94442;
+    /* black */
+}
+
+textarea.ng-dirty.ng-invalid {
+    color: red
+}
+
+textarea.ng-valid[required],
+.ng-valid.required {
+    border-bottom: 1px solid #42A948;
+    /* green */
+    box-shadow: 0 1px 0 0 #42A948;
+    /* black */
+
+}
+
+textarea.ng-invalid:not(form) {
+    border-bottom: 1px solid #a94442;
+    /* red */
+    box-shadow: 0 1px 0 0 #a94442;
+    /* black */
+}
+
+sup {
+    color: red;
+}
+
+.imgCartaAcepta{
+    width: 60%;
+    background: linear-gradient(to right, rgba(190, 22, 34,1), rgba(243, 146, 0,1));
+}
+.imgPrivacidad{
+    width: 60%;
+    background: linear-gradient(to right, rgba(243, 146, 0,1), rgba(252, 234, 16,1));
+}
+.imgCodCond{
+    width: 60%;
+    background: linear-gradient(to right, rgba(222, 220, 16,1), rgba(58, 170, 53,1));
+}

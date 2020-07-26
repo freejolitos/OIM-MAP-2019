@@ -1,0 +1,93 @@
+<!-- Titulo de la página -->
+<div class="container">
+  <div class="section center-align">
+    <h4>Seguimiento de menores y adolecentes no acompañados (id: {{this.idFolio}})</h4>
+  </div>
+</div>
+
+
+<div class="divider"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+      <h5>Resumen del caso</h5>
+
+      <table class="striped responsive-table">
+        <thead>
+          <th>Nombre completo</th>
+          <th>Nacionalidad</th>
+          <th>Edad</th>
+          <th>Observaciones</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of detalleMenorNA">
+            <td>{{ item.nombreCompletoControl }}</td>
+            <td>{{ item.nacionalidad }}</td>
+            <td>{{ item.edadcontrol }}</td>
+            <td>{{ item.observacionesControl }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="col s12">
+      <div class="divider"></div>
+    </div>
+
+    <div class="col s12 right-align">
+      <br>
+      <a class="waves-effect waves-light btn modal-trigger azul-oim" href="#modalSeguimiento">Nueva nota</a>
+      <br>
+    </div>
+
+    <div class="col s12">
+      <br>
+      <div class="divider"></div>
+    </div>
+
+    <div class="col s12">
+
+      <h5>Notas de seguimiento</h5>
+
+      <table class="striped responsive-table">
+        <thead>
+          <th>Fecha</th>
+          <th>Nota de seguimiento</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item2 of notasSeguimiento">
+            <td>{{ item2.timestamp }}</td>
+            <td>{{ item2.notaSeguimientoControl }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modalSeguimiento">
+  <div class="modal-content">
+    <h4>Nota de seguimiento</h4>
+    <form [formGroup]="formSeguimiento" (ngSubmit)="submitForm()">
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="notaSeguimiento">Nota de seguimiento:</label>
+          <textarea name="notaSeguimiento" id="notaSeguimiento" class="materialize-textarea" maxlength="200"
+            oninput="this.value = this.value.toUpperCase()" formControlName="notaSeguimientoControl"></textarea>
+        </div>
+        <div class="col s12 right-align">
+          <button [disabled]="!this.formSeguimiento.valid" type="submit"
+            class="modal-close waves-effect waves-green btn azul-oim">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <a class="modal-close waves-effect waves-green btn red">Cerrar</a>
+  </div>
+</div>

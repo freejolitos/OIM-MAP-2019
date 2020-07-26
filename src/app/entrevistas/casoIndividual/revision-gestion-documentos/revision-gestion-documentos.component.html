@@ -1,0 +1,156 @@
+<!-- TREN DE ESTATUS -->
+<div class="container hide-on-med-and-down">
+  <div class="row">
+
+    <!-- DATOS GENERALES -->
+    <div class="col s4">
+      <div class="icon-block">
+        <h4 class="center indigo-text text-accent-3">
+          <i class="material-icons">face</i>
+        </h4>
+        <h6 class="center">Datos generales</h6>
+      </div>
+    </div>
+    <!-- REVISION Y GESTION DE DOCUMENTOS -->
+    <div class="col s4">
+      <div class="icon-block">
+        <h4 class="center indigo-text text-accent-3">
+          <i class="material-icons">folder</i>
+        </h4>
+        <h6 class="center">Revisión y gestión de documentos</h6>
+      </div>
+    </div>
+    <!-- INSERCION LABORAL -->
+    <div class="col s4">
+      <div class="icon-block">
+        <h4 class="center grey-text text-lighten-2">
+          <i class="material-icons">laptop_mac</i>
+        </h4>
+        <h6 class="center grey-text text-lighten-2">Inserción laboral</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Titulo de la seccion -->
+<div class="container">
+  <div class="section center-align">
+    <h4>Revisión y gestión de documentos</h4>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="container">
+
+  <form [formGroup]="formRevisionGestion" (ngSubmit)="submitForm()">
+
+    <div class="row">
+
+      <!-- Subtitulo seccion -->
+      <div class="col s12">
+        <blockquote>Estos datos deberán ser registrados cuando la persona migrante haya reunido sus documentos para el trámite a solicitar ante el INM.</blockquote>
+      </div>
+
+      <!-- Documento identidad control -->
+      <div class="input-field col s12">
+        <label for="radioReunioDocumentos" class="active">¿La persona migrante reunió todos los documentos
+          requeridos?</label>
+        <select name="radioReunioDocumentos" id="radioReunioDocumentos" class="validate"
+          formControlName="radioReunioDocumentosControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Observaciones del seguimiento -->
+      <div [hidden]="this.formRevisionGestion.controls.radioReunioDocumentosControl.value != 1"
+        class="input-field col s12">
+        <label for="observaciones">Observaciones de seguimiento</label>
+        <textarea name="observaciones" id="observaciones" class="materialize-textarea" maxlength="200"
+          oninput="this.value = this.value.toUpperCase()" formControlName="observacionesf2Control"></textarea>
+      </div>
+
+      <!-- Por que -->
+      <div [hidden]="this.formRevisionGestion.controls.radioReunioDocumentosControl.value != 2"
+        class="input-field col s12">
+        <label for="observaciones">¿Por qué?</label>
+        <textarea name="porQue" id="porQue" class="materialize-textarea" maxlength="200"
+          oninput="this.value = this.value.toUpperCase()" formControlName="porQueControl"></textarea>
+      </div>
+
+      <!-- Resolucion migratoria -->
+      <div class="input-field col s12">
+        <label for="radioResolucionMigratoria" class="active">¿La resolución migratoria fué positiva?</label>
+        <select name="radioResolucionMigratoria" id="radioResolucionMigratoria" class="validate"
+          formControlName="radioResolucionMigratoriaControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Condicion migraotria -->
+      <div [hidden]="this.formRevisionGestion.controls.radioResolucionMigratoriaControl.value != 1"
+        class="input-field col s12">
+        <label for="cual" class="active">¿Cuál le dieron?</label>
+        <select name="cual" id="cual" class="validate" formControlName="cualControl">
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of resolucion" [value]="item.id">{{item.resolucion}}</option>
+        </select>
+        <span class="helper-text">Seleccione la resolución</span>
+      </div>
+
+      <!-- Fecha entrada estacion -->
+      <div [hidden]="this.formRevisionGestion.controls.radioResolucionMigratoriaControl.value != 1"
+        class="input-field col s12 m6">
+        <label for="fechaResolucion">Fecha de resolución</label>
+        <input type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
+          data-inputmask-showMaskOnHover="false" class="validate" name="fechaResolucion" id="fechaResolucion"
+          formControlName="fechaResolucionControl">
+        <span class="helper-text">Formato dd/mm/aaaa</span>
+      </div>
+
+      <!-- CURP -->
+      <div [hidden]="this.formRevisionGestion.controls.radioResolucionMigratoriaControl.value != 1"
+        class="input-field col s12 m6">
+        <label for="CURP">CURP</label>
+        <input type="text" name="CURP" id="CURP" class="validate" maxlength="18"
+          oninput="this.value = this.value.toUpperCase()" formControlName="CURPControl">
+        <span class="helper-text">Ingrese los 18 caracteres del CURP</span>
+      </div>
+
+      <!-- Observaciones del seguimiento -->
+      <div [hidden]="this.formRevisionGestion.controls.radioResolucionMigratoriaControl.value != 2"
+        class="input-field col s12">
+        <label for="negativa">Especificar el por qué su resolución fue negativa y cuál es el procedimiento a
+          seguir</label>
+        <textarea name="negativa" id="negativa" class="materialize-textarea" maxlength="200"
+          oninput="this.value = this.value.toUpperCase()" formControlName="negativaControl"></textarea>
+      </div>
+
+      <!-- Boton submit -->
+      <br>
+      <div class="col s12 right-align">
+        <button type="submit" class="btn waves-effect waves-light azul-oim" [disabled]="!this.formRevisionGestion.valid">
+          Siguiente <i class="material-icons right">send</i>
+        </button>
+      </div>
+      <br>
+
+
+
+    </div>
+
+  </form>
+
+</div>
+
+<!-- <div class="container">
+  <p>
+    valor === {{ this.formRevisionGestion.value | json }}
+  </p>
+</div> -->

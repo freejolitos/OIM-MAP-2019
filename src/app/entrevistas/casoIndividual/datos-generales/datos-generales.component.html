@@ -1,0 +1,994 @@
+<!-- TREN DE ESTATUS -->
+<div class="container hide-on-med-and-down">
+  <div class="row">
+
+    <!-- DATOS GENERALES -->
+    <div class="col s4">
+      <div class="icon-block">
+        <h4 class="center indigo-text text-accent-3">
+          <i class="material-icons">face</i>
+        </h4>
+        <h6 class="center">Recepción y Valoración</h6>
+      </div>
+    </div>
+    <!-- REVISION Y GESTION DE DOCUMENTOS -->
+    <div class="col s4">
+      <div class="icon-block">
+        <h4 class="center grey-text text-lighten-2">
+          <i class="material-icons">folder</i>
+        </h4>
+        <h6 class="center grey-text text-lighten-2">Revisión y gestión de documentos</h6>
+      </div>
+    </div>
+    <!-- INSERCION LABORAL -->
+    <div class="col s4">
+      <div class="icon-block">
+        <h4 class="center grey-text text-lighten-2">
+          <i class="material-icons">laptop_mac</i>
+        </h4>
+        <h6 class="center grey-text text-lighten-2">Inserción laboral</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Formulario de datos generales -->
+<div class="container">
+  <form [formGroup]="formDatosGenerales" (ngSubmit)="submitFormContinuar()">
+
+    <div class="row">
+
+      <!-- ==== INICIO FIRMA ACUERDOS === -->
+      <div class="divider"></div>
+      <!-- Titulo de la seccion -->
+      <div class="col s12">
+        <div class="section center-align">
+          <h4>Firma de acuerdos</h4>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="row">
+
+      <!-- Subtitulo de seccion -->
+      <div class="col s12">
+        <h6>Antes de iniciar la encuesta se debe asegurar que se poseen los documentos firmados.</h6>
+      </div>
+
+      <!-- Tarjetas para modales de documentos -->
+      <div class="col s12 m4">
+        <div class="card hoverable">
+          <div class="card-image">
+            <img class="imgCartaAcepta" src="assets/images/iconos/CartaAceptacion.png">
+            <a class="btn-floating halfway-fab waves-effect waves-light modal-trigger azul-oim"
+              href="#modalCartaAtencion"><i class="material-icons">remove_red_eye</i></a>
+          </div>
+          <div class="card-content">
+            <span class="card-title">Carta de atención</span>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4">
+        <div class="card hoverable">
+          <div class="card-image">
+            <img class="imgPrivacidad" src="assets/images/iconos/Privacidad.png">
+            <a class="btn-floating halfway-fab waves-effect waves-light modal-trigger azul-oim"
+              href="#modalAvisoPrivacidad"><i class="material-icons">remove_red_eye</i></a>
+          </div>
+          <div class="card-content">
+              <span class="card-title">Aviso de privacidad</span>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4">
+        <div class="card hoverable">
+          <div class="card-image">
+            <img class="imgCodCond" src="assets/images/iconos/CodigoConducta.png">
+            <a class="btn-floating halfway-fab waves-effect waves-light modal-trigger azul-oim"
+              href="#modalCodigoConducta"><i class="material-icons">remove_red_eye</i></a>
+          </div>
+          <div class="card-content">
+              <span class="card-title">Código de conducta</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seccion de checkbox -->
+      <div class="col s12">
+        <p>El implementador a cargo deberá asegurarse que la persona migrante leyó, entendió y firmó los acuerdos de
+          atención.</p>
+        <blockquote>Marque las opciones que correspondan.</blockquote>
+      </div>
+
+      <div class="col s12 m4">
+        <p>
+          <label>
+            <input type="checkbox" id="checkCartaAtencion" formControlName="checkCartaAtencionControl" />
+            <span>Carta de atención</span>
+          </label>
+        </p>
+      </div>
+
+      <div class="col s12 m4">
+        <p>
+          <label>
+            <input type="checkbox" id="checkAvisoPrivacidad" formControlName="checkAvisoPrivacidadControl" />
+            <span>Aviso de privacidad</span>
+          </label>
+        </p>
+      </div>
+
+      <div class="col s12 m4">
+        <p>
+          <label>
+            <input type="checkbox" id="checkCodigoConducta" formControlName="checkCodigoConductaControl" />
+            <span>Código de conducta</span>
+          </label>
+        </p>
+      </div>
+
+      <!-- Seccion preguntas datos generales y radiobuttons -->
+      <div class="input-field col s12">
+        <label for="radioRecibidoAtencion" class="active">¿Ha recibido atención en alguna ventanilla informativa
+          anteriormente?</label>
+        <select name="radioRecibidoAtencion" id="radioRecibidoAtencion" class="validate"
+          formControlName="radioRecibidoAtencionControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Lugar de atencion -->
+      <div [hidden]="this.formDatosGenerales.controls.radioRecibidoAtencionControl.value != 1"
+        class="input-field col s12">
+        <label for="lugarAtencion" class="active">Lugar de atención:</label>
+        <select name="lugarAtencion" id="lugarAtencion" class="validate:w
+        " formControlName="lugarAtencionControl">
+          <option value="0" disabled selected></option>
+          <option *ngFor="let lugar of catLugarAtencion" [value]="lugar.id">{{lugar.estado}}
+          </option>
+        </select>
+        <span class="helper-text">Seleccione el lugar</span>
+      </div>
+
+      <div class="col s12">
+        <blockquote>Realice la carga de los documentos firmados:</blockquote>
+      </div>
+
+      <!-- Documento Carta de atencion -->
+      <div class="file-field input-field col s12 m6 l4">
+        <div class="btn">
+          <span><i class="material-icons">attachment</i></span>
+          <input type="file" name="doctoCartaAtencion" id="doctoCartaAtencion">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Carta de atención">
+        </div>
+      </div>
+
+      <!-- Documento Carta de atencion -->
+      <div class="file-field input-field col s12 m6 l4">
+        <div class="btn">
+          <span><i class="material-icons">attachment</i></span>
+          <input type="file" name="doctoAvisoPrivacidad" id="doctoAvisoPrivacidad"
+            (change)="handleFileSelect($event.target.files)">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Aviso de privacidad">
+        </div>
+      </div>
+
+      <!-- Documento Carta de atencion -->
+      <div class="file-field input-field col s12 m6 l4">
+        <div class="btn">
+          <span><i class="material-icons">attachment</i></span>
+          <input type="file" name="doctoCodigoConducta" id="doctoCodigoConducta">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Codigo de conducta">
+        </div>
+      </div>
+
+    </div>
+    <!-- === FIN FIRMA ACUERDOS === -->
+
+    <!-- === INICIO DE DATOS GENERALES === -->
+    <div class="row">
+
+      <div class="divider"></div>
+      <!-- Titulo de la seccion -->
+      <div class="col s12">
+        <div class="section center-align">
+          <h4>Recepción y Valoración</h4>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="row">
+
+      <!-- Subtitulo seccion -->
+      <div class="col s12">
+        <blockquote>Ingresa los datos generales de la persona migrante:</blockquote>
+      </div>
+
+      <!-- Nombres -->
+      <div class="input-field col s12 m6 l4">
+        <label for="nombres">Nombre(s)<sup> *</sup></label>
+        <input type="text" name="nombres" id="nombres" class="validate" maxlength="50"
+          oninput="this.value = this.value.toUpperCase()" formControlName="nombresControl" required>
+        <span class="helper-text">Nombre(s) de la persona migrante</span>
+      </div>
+
+      <!-- Apellido Paterno -->
+      <div class="input-field col s12 m6 l4">
+        <label for="apellidoPaterno">Apellido paterno<sup> *</sup></label>
+        <input type="text" name="apellidoPaterno" id="apellidoPaterno" class="validate" maxlength="50"
+          oninput="this.value = this.value.toUpperCase()" formControlName="apellidoPaternoControl" required>
+        <span class="helper-text">Apellido paterno o primer apellido</span>
+      </div>
+
+      <!-- Apellido Materno -->
+      <div class="input-field col s12 m6 l4">
+        <label for="apellidoMaterno">Apellido materno</label>
+        <input type="text" name="apellidoMaterno" id="apellidoMaterno" class="validate" maxlength="50"
+          oninput="this.value = this.value.toUpperCase()" formControlName="apellidoMaternoControl">
+        <span class="helper-text">Apellido materno o segundo apellido</span>
+      </div>
+
+      <!-- Nombre Alternativo -->
+      <div class="input-field col s12 m6 l4">
+        <label for="nombreAlterno">Nombre alternativo/trans</label>
+        <input type="text" name="nombreAlterno" id="nombreAlterno" class="validate" maxlength="50"
+          oninput="this.value = this.value.toUpperCase()" formControlName="nombreAlternoControl">
+        <span class="helper-text">(personas de la comunidad LGBT)</span>
+      </div>
+
+      <!-- Fecha de nacimiento -->
+      <div class="input-field col s12 m6 l4">
+        <label for="fechaNacimiento">Fecha de nacimiento<sup> *</sup></label>
+        <input type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
+          data-inputmask-showMaskOnHover="false" class="validate" name="fechaNacimiento" id="fechaNacimiento"
+          formControlName="fechaNacimientoControl" (blur)="eventEdad()" required>
+        <span class="helper-text">Formato dd/mm/aaaa</span>
+      </div>
+
+      <!-- Edad -->
+      <div class="input-field col s12 m6 l4">
+        <label for="edad" id="labelEdad">Edad</label>
+        <input type="text" name="edad" id="edad" class="validate" formControlName="edadControl" required>
+        <span class="helper-text">Edad de la persona migrante</span>
+      </div>
+
+      <!-- Nacionalidad-->
+      <div class="input-field col s12 m6 l4">
+        <label for="nacionalidad" class="active">Nacionalidad<sup> *</sup></label>
+        <select name="nacionalidad" id="nacionalidad" class="validate browser-default"
+          formControlName="nacionalidadControl" (change)="onSelectNacionalidad($event.target.value)" required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of paisesNacionalidad" [value]="item.id">{{item.pais}}</option>
+        </select>
+        <span class="helper-text">País de nacimiento</span>
+      </div>
+
+      <!-- Departamento -->
+      <div class="input-field col s12 m6 l4">
+        <label for="departamento" class="active">Departamento, estado o región:<sup> *</sup></label>
+        <select name="departamento" id="departamento" class="validate browser-default"
+          formControlName="departamentoControl" required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of deptosNacionalidad" [value]="item.id">{{item.depto}}</option>
+        </select>
+        <span class="helper-text">Seleccione el departamento</span>
+      </div>
+
+      <!-- Telefono -->
+      <div class="input-field col s12 m6 l4">
+        <label for="telefono">Teléfono</label>
+        <input type="text" name="telefono" id="telefono" class="validate" formControlName="telefonoControl">
+        <span class="helper-text">Número de contacto</span>
+      </div>
+
+      <!-- Correo electronico -->
+      <div class="input-field col s12 m6">
+        <label for="correoElectronico">Correo electrónico</label>
+        <input type="text" name="correoElectronico" id="correoElectronico" class="validate" maxlength="50"
+          formControlName="correoElectronicoControl">
+        <span class="helper-text">Correo de contacto</span>
+      </div>
+
+      <!-- Genero -->
+      <div class="col s12">
+        <br>
+        <span class="grey-text">Género: <sup> *</sup></span>
+      </div>
+
+      <div class="col s12 m6 l4">
+        <p>
+          <label>
+            <input value="1" type="radio" formControlName="radioGeneroControl" />
+            <span>Masculino</span>
+          </label>
+        </p>
+      </div>
+
+      <div class="col s12 m6 l4">
+        <p>
+          <label>
+            <input value="2" type="radio" formControlName="radioGeneroControl" />
+            <span>Femenino</span>
+          </label>
+        </p>
+      </div>
+
+      <div class="col s12 m6 l4">
+        <p>
+          <label>
+            <input value="3" type="radio" formControlName="radioGeneroControl" />
+            <span>No Binario</span>
+          </label>
+        </p>
+      </div>
+
+      <div class="col s12">
+        <span class="grey-text" style="font-size: 12px;">Género asignado legalmente</span>
+      </div>
+
+      <div class="col s12">
+        <br>
+      </div>
+
+      <!-- Identidad de genero -->
+      <div class="input-field col s12 m6">
+        <label for="orientacionSexual" class="active">Orientacion sexual</label>
+        <select name="orientacionSexual" id="orientacionSexual" class="validate"
+          formControlName="orientacionSexualControl">
+          <option value="0" disabled selected></option>
+          <option *ngFor="let orientacion of catOrientacionSexual" [value]="orientacion.id">{{orientacion.orientacion}}
+          </option>
+        </select>
+        <span class="helper-text">Orientación o preferencia sexual</span>
+      </div>
+
+      <!-- Idioma -->
+      <div class="input-field col s12 m6">
+        <label for="idioma" class="active">Idioma</label>
+        <select name="idioma" id="idioma" class="validate" formControlName="idiomaControl">
+          <option value="0" disabled selected></option>
+          <option *ngFor="let idioma of catIdiomas" [value]="idioma.id">{{idioma.idioma}}</option>
+        </select>
+        <span class="helper-text">Idioma nativo</span>
+      </div>
+
+      <!-- Estado civil -->
+      <div class="input-field col s12 m6">
+        <label for="estadoCivil" class="active">Estado civil</label>
+        <select name="estadoCivil" id="estadoCivil" class="validate" formControlName="estadoCivilControl">
+          <option value="0" disabled selected></option>
+          <option *ngFor="let edoCivil of catEstadoCivil" [value]="edoCivil.id">{{edoCivil.edoCivil}}</option>
+        </select>
+        <span class="helper-text">Estado civil reconocido</span>
+      </div>
+
+      <!-- Leer y escribir -->
+      <div class="input-field col s12 m6">
+        <label for="radioLeer" class="active">¿Sabe leer y escribir?</label>
+        <select name="radioLeer" id="radioLeer" class="validate" formControlName="radioLeerControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">* Información exclusiva para el implementador</span>
+      </div>
+
+      <!-- Subtitulo seccion -->
+      <div class="col s12">
+        <blockquote>Dirección de la persona migrante:</blockquote>
+      </div>
+
+      <!-- Pais -->
+      <div class="input-field col s12 m6 l4">
+        <label for="pais" class="active">País<sup> *</sup></label>
+        <select name="pais" id="pais" class="validate browser-default" formControlName="paisControl"
+          (change)="onSelectDireccion($event.target.value)" required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of paisesDireccion" [value]="item.id">{{item.pais}}</option>
+        </select>
+        <span class="helper-text">País de residencia</span>
+      </div>
+
+      <!-- Estado o departamento -->
+      <div class="input-field col s12 m6 l4">
+        <label for="estado" class="active">Estado, departamento o región:<sup> *</sup></label>
+        <select name="estado" id="estado" class="validate browser-default" formControlName="estadoControl" required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of deptosDireccion" [value]="item.id">{{item.depto}}</option>
+        </select>
+        <span class="helper-text">Estado, departamento o región de recidencia</span>
+      </div>
+
+      <!-- Codigo postal -->
+      <div class="input-field col s12 m6 l4">
+        <label for="CP">Código postal</label>
+        <input type="text" name="CP" id="CP" class="validate" maxlength="10" formControlName="CPControl">
+        <span class="helper-text">CP del lugar de residencia</span>
+      </div>
+
+    </div>
+    <!-- === FIN DATOS GENERALES === -->
+
+    <!-- === INICIO TRAYECTO MIGRATORIO === -->
+    <div class="divider"></div>
+    <!-- Titulo seccion -->
+    <div class="row">
+      <div class="col s12">
+        <div class="section center-align">
+          <h4>Trayecto migratorio</h4>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="row">
+
+      <!-- Subtitulo seccion -->
+      <div class="col s12">
+        <blockquote>En esta sección se registra el trayecto migratorio de la persona migrante:</blockquote>
+      </div>
+
+      <!-- Fecha de ingreso territorio mexicano -->
+      <div class="input-field col s12 m6">
+        <label for="fechaIngreso">Fecha de ingreso a México</label>
+        <input type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
+          data-inputmask-showMaskOnHover="false" class="validate" name="fechaIngreso" id="fechaIngreso"
+          formControlName="fechaIngresoControl">
+        <span class="helper-text">Formato dd/mm/aaaa</span>
+      </div>
+
+      <!-- Medio de transporte -->
+      <div class="input-field col s12 m6">
+        <label for="medioTransporte" class="active">Medio de ingreso a México:</label>
+        <select name="medioTransporte" id="medioTransporte" class="validate" formControlName="medioTransporteControl">
+          <option value="0" disabled selected></option>
+          <option *ngFor="let item of catMedioTransporte" [value]="item.id">{{item.medioTransporte}}</option>
+        </select>
+        <span class="helper-text">Seleccione la via por la cual ingreso al país</span>
+      </div>
+
+      <!-- Cuantas veces territorio nacional -->
+      <div class="input-field col s12">
+        <label for="cuantasVeces">¿Cuántas veces ha estado en territorio Mexicano?</label>
+        <input type="text" name="cuantasVeces" id="cuantasVeces" class="validate" maxlength="2"
+          oninput="this.value = this.value.toUpperCase()" formControlName="cuantasVecesControl">
+        <span class="helper-text">Contando esta ocasión, ingrese el número de veces que ha estado en territorio
+          Mexicano</span>
+      </div>
+
+      <!-- Rechazo Aeropuerto -->
+      <div class="input-field col s12 m6">
+        <label for="radioRechazoAeropuerto" class="active">¿Ha sido rechazado en un aeropuerto en México?</label>
+        <select name="radioRechazoAeropuerto" id="radioRechazoAeropuerto" class="validate"
+          formControlName="radioRechazoAeropuertoControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Estacion migratroria -->
+      <div class="input-field col s12 m6">
+        <label for="radioEstacionMigratoria" class="active">¿Ha estado en una estación migratoria?</label>
+        <select name="radioEstacionMigratoria" id="radioEstacionMigratoria" class="validate"
+          formControlName="radioEstacionMigratoriaControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Estacion Migratoria -->
+      <div [hidden]="this.formDatosGenerales.controls.radioEstacionMigratoriaControl.value != 1"
+        class="input-field col s12">
+        <label for="estacionMigratoria" class="active">¿En cúal estacion migratoria?</label>
+        <select name="estacionMigratoria" id="estacionMigratoria" class="validate"
+          formControlName="estacionMigratoriaControl">
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of estaciones" [value]="item.id">{{item.estacion}}</option>
+        </select>
+        <span class="helper-text">Seleccione la estación migratoria</span>
+      </div>
+
+      <!-- Tiempo detencion -->
+      <div [hidden]="this.formDatosGenerales.controls.radioEstacionMigratoriaControl.value != 1" class="col s12">
+        <br>
+        <span class="grey-text">¿Cuánto tiempo estuvo detenido?</span>
+      </div>
+
+      <!-- Fecha entrada estacion -->
+      <div [hidden]="this.formDatosGenerales.controls.radioEstacionMigratoriaControl.value != 1"
+        class="input-field col s12 m4">
+        <label for="fechaIngresoEstacion">Fecha de entrada</label>
+        <input type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
+          data-inputmask-showMaskOnHover="false" class="validate" name="fechaIngresoEstacion" id="fechaIngresoEstacion"
+          formControlName="fechaIngresoEstacionControl">
+        <span class="helper-text">Formato dd/mm/aaaa</span>
+      </div>
+
+      <!-- Fecha salida estacion  -->
+      <div [hidden]="this.formDatosGenerales.controls.radioEstacionMigratoriaControl.value != 1"
+        class="input-field col s12 m4">
+        <label for="fechaSalidaEstacion">Fecha de salida</label>
+        <input type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
+          data-inputmask-showMaskOnHover="false" class="validate" name="fechaSalidaEstacion" id="fechaSalidaEstacion"
+          formControlName="fechaSalidaEstacionControl" (blur)="eventTD()">
+        <span class="helper-text">Formato dd/mm/aaaa</span>
+      </div>
+
+      <!-- Tiempo Detencion -->
+      <div [hidden]="this.formDatosGenerales.controls.radioEstacionMigratoriaControl.value !=1"
+        class="input-field col s12 m6 l4">
+        <label for="tiempoDetencion" id="labelTiempoDetencion">Tiempo de detencion</label>
+        <input type="text" name="tiempoDetencion" id="tiempoDetencion" class="validate" maxlength="5"
+          formControlName="tiempoDetencionControl">
+        <span class="helper-text">Tiempo que pasó detenido en días.</span>
+      </div>
+
+    </div>
+
+    <!-- === FIN TRAYECTO MIGRATORIO === -->
+
+
+    <!-- === INICIO CONDICION MIGRATORIA === -->
+
+    <div class="divider"></div>
+    <!-- Titulo seccion -->
+    <div class="row">
+      <div class="col s12">
+        <div class="section center-align">
+          <h4>Condición migratoria de la persona migrante</h4>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="row">
+
+      <!-- Subtitulo seccion -->
+      <div class="col s12">
+        <blockquote>Ingresa los datos de la condición migratoria de la persona migrante.</blockquote>
+      </div>
+
+      <!-- Condicion migraotria -->
+      <div class="input-field col s12 m6">
+        <label for="condicionMigratoria" class="active">¿Qué condición migratoria tiene? <sup> *</sup></label>
+        <select name="condicionMigratoria" id="condicionMigratoria" class="validate"
+          formControlName="condicionMigratoriaControl" required>
+          <option value="0" disabled selected></option>
+          <option *ngFor="let item of condicion" [value]="item.id">{{item.condicion}}</option>
+        </select>
+        <span class="helper-text">Seleccione la condicion migratoria</span>
+      </div>
+
+      <!-- Hace cuanto tiempo -->
+      <div [hidden]="this.formDatosGenerales.controls.condicionMigratoriaControl.value != 2"
+        class="input-field col s12 m6">
+        <label for="haceCuantoTiempo">¿Hace cuánto tiempo?</label>
+        <input type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
+          data-inputmask-showMaskOnHover="false" name="haceCuantoTiempo" id="haceCuantoTiempo" class="validate"
+          formControlName="haceCuantoTiempoControl">
+        <span class="helper-text">Formato dd/mm/aaaa</span>
+      </div>
+
+      <!-- Condicion migratoria específica -->
+      <div [hidden]="this.formDatosGenerales.controls.condicionMigratoriaControl.value != 1"
+        class="input-field col s12 m6">
+        <label for="condicionMigratoriaEspecifica" class="active">Condición migratoria específica</label>
+        <select name="condicionMigratoriaEspecifica" id="condicionMigratoriaEspecifica" class="validate"
+          formControlName="condicionMigratoriaEspecificaControl">
+          <option value="0" disabled selected></option>
+          <option *ngFor="let item of resolucion" [value]="item.id">{{item.resolucion}}</option>
+        </select>
+        <span class="helper-text">Seleccione la condición migratoria específica</span>
+      </div>
+
+      <!-- if Otro -->
+      <div [hidden]="this.formDatosGenerales.controls.condicionMigratoriaEspecificaControl.value != 10"
+        class="input-field col s12">
+        <label for="otroCondicionMigratoria">Otra</label>
+        <input type="text" name="otroCondicionMigratoria" id="otroCondicionMigratoria" class="validate" maxlength="50"
+          formControlName="otroCondicionMigratoriaControl">
+        <span class="helper-text">Especifique su condición migratoria</span>
+      </div>
+
+      <!-- Documentos migratorios -->
+      <div class="col s12">
+        <br>
+        <span class="grey-text">Documentos de identificacion con los que cuenta la persona migrante.</span>
+        <br>
+        <span class="grey-text"><sub>Marque solo las opciones que correspondan.</sub></span>
+      </div>
+
+      <!-- Pasaporte -->
+      <div class="col s12 m4">
+        <p>
+          <label>
+            <input type="checkbox" id="checkPasaporte" formControlName="checkPasaporteControl" />
+            <span>Pasaporte</span>
+          </label>
+        </p>
+      </div>
+
+
+      <!-- Partida nacimiento -->
+      <div class="col s12 m4">
+        <p>
+          <label>
+            <input type="checkbox" id="partidaNacimiento" formControlName="checkPartidaNacimientoControl" />
+            <span>Partida de nacimiento</span>
+          </label>
+        </p>
+      </div>
+
+      <!-- Cedula identidad -->
+      <div class="col s12 m4">
+        <p>
+          <label>
+            <input type="checkbox" id="cedulaIdentidad" formControlName="checkCedulaIdentidadControl" />
+            <span>Cedula de identidad de su país</span>
+          </label>
+        </p>
+      </div>
+
+      <!-- Acta de matrimonio -->
+      <div class="col s12 m4">
+        <p>
+          <label>
+            <input type="checkbox" id="actaMatrimonio" formControlName="checkActaMatrimonioControl" />
+            <span>Acta de matrimonio</span>
+          </label>
+        </p>
+      </div>
+
+      <!-- Ninguno -->
+      <div class="col s12 m4">
+        <p>
+          <label>
+            <input type="checkbox" id="ninguno" formControlName="checkNingunoControl" />
+            <span>Ninguno</span>
+          </label>
+        </p>
+      </div>
+
+      <!-- Otro -->
+      <div class="col s12 m4">
+        <p>
+          <label>
+            <input type="checkbox" checked="unchecked" id="otro" formControlName="checkOtroControl" />
+            <span>Otro</span>
+          </label>
+        </p>
+      </div>
+
+      <!-- if Otro -->
+      <div [hidden]="!this.formDatosGenerales.controls.checkOtroControl.value" class="input-field col s12">
+        <label for="otroDocumento">¿Cual?</label>
+        <input type="text" name="otroDocumento" id="otroDocumento" class="validate" maxlength="50"
+          oninput="this.value = this.value.toUpperCase()" formControlName="otroDocumentoControl">
+        <span class="helper-text">Indique el nombre del documento migratorio</span>
+      </div>
+
+    </div>
+
+    <!-- === FIN CONDICION MIGRATORIA === -->
+
+    <!-- === INICIO TRAMITE SOLICITAR ANTE INM === -->
+
+    <div class="divider"></div>
+    <!-- Titulo seccion -->
+    <div class="row">
+      <div class="col s12">
+        <div class="section center-align">
+          <h4>Trámite a solicitar ante el INM</h4>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="row">
+
+      <!-- Subtitulo seccion -->
+      <div class="col s12">
+        <blockquote>Ingrese los datos del trámite que la persona migrante desea realizar</blockquote>
+      </div>
+
+      <!-- Condicion migraotria -->
+      <div class="input-field col s12">
+        <label for="condicionMigratoriaTramite" class="active">¿Qué condición migratoria solicitará ante el INM?<sup>
+            *</sup></label>
+        <select name="condicionMigratoriaTramite" id="condicionMigratoriaTramite" class="validate"
+          formControlName="condicionMigratoriaTramiteControl" required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of tramite" [value]="item.id">{{item.tramite}}</option>
+        </select>
+        <span class="helper-text">Seleccione la condición migratoria</span>
+      </div>
+
+      <!-- if Otro -->
+      <div [hidden]="this.formDatosGenerales.controls.condicionMigratoriaTramiteControl.value != 14"
+        class="input-field col s12">
+        <label for="otroTramiteSolicitar">Otro:</label>
+        <input type="text" name="otroTramiteSolicitar" id="otroTramiteSolicitar" class="validate" maxlength="50"
+          formControlName="otroTramiteSolicitarControl">
+        <span class="helper-text">Especifique el trámite a solicitar</span>
+      </div>
+
+      <!-- Listado de documentos -->
+      <div class="input-field col s12">
+        <label for="listadoDocumentos">Documentos que se deben obtener para
+          realizar su solicitud ante el INM
+        </label>
+        <textarea type="text" name="listadoDocumentos" id="listadoDocumentos" class="materialize-textarea validate"
+          maxlength="200" oninput="this.value = this.value.toUpperCase()"
+          formControlName="listadoDocumentosControl"></textarea>
+        <span class="helper-text">No olvidar mencionar los costos monetarios de cada solicitud</span>
+      </div>
+
+      <!-- Documento identidad control -->
+      <div class="input-field col s12">
+        <label for="radioDocumentoIdentidad" class="active">¿La persona migrante tiene su documentación de identidad
+          requerida?</label>
+        <select name="radioDocumentoIdentidad" id="radioDocumentoIdentidad" class="validate"
+          formControlName="radioDocumentoIdentidadControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- realizo canalizacion -->
+      <div [hidden]="this.formDatosGenerales.controls.radioDocumentoIdentidadControl.value != 2"
+        class="input-field col s12">
+        <label for="radioRealizoCanalizacion" class="active">¿Se realizó canalización u orientación con el consulado del
+          país de origen de la persona migrante?</label>
+        <select name="radioRealizoCanalizacion" id="radioRealizoCanalizacion" class="validate"
+          formControlName="radioRealizoCanalizacionControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Donde fue canalizado -->
+      <div [hidden]="this.formDatosGenerales.controls.radioRealizoCanalizacionControl.value != 1"
+        class="input-field col s12">
+        <label for="explicacionCanalizado">Especifique dónde fue canalizado o cómo se desarrolló la
+          atención.
+        </label>
+        <textarea name="explicacionCanalizado" id="explicacionCanalizado" class="materialize-textarea validate"
+          maxlength="200" oninput="this.value = this.value.toUpperCase()"
+          formControlName="explicacionCanalizadoControl"></textarea>
+      </div>
+
+    </div>
+
+
+    <!-- === FIN TRAMITE SOLICITAR ANTE INM === -->
+
+    <!-- === INICIO ACOMPANAMIENTO === -->
+
+    <div class="divider"></div>
+    <!-- Titulo seccion -->
+    <div class="row">
+      <div class="col s12">
+        <div class="section center-align">
+          <h4>Acompañamiento</h4>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="row">
+
+      <!-- Requiere acompanamiento -->
+      <div class="input-field col s12">
+        <label for="radioRequiereAcompanamiento" class="active">¿Requiere acompañamiento?</label>
+        <select name="radioRequiereAcompanamiento" id="radioRequiereAcompanamiento" class="validate"
+          formControlName="radioRequiereAcompanamientoControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Que acompanamiento -->
+      <div [hidden]="this.formDatosGenerales.controls.radioRequiereAcompanamientoControl.value != 1"
+        class="input-field col s12">
+        <label for="queAcompanamiento">¿Qué acompañamiento requiere?</label>
+        <textarea name="queAcompanamiento" id="queAcompanamiento" class="materialize-textarea validate" maxlength="200"
+          oninput="this.value = this.value.toUpperCase()" formControlName="queAcompanamientoControl"></textarea>
+        <span class="helper-text">Especifique qué acompañamiento requiere.</span>
+      </div>
+
+    </div>
+
+    <!-- === FIN ACOMPANAMIENTO === -->
+
+    <!-- === INICIO OBSERVACIONES GENERALES === -->
+
+    <div class="divider"></div>
+    <!-- Titulo seccion -->
+    <div class="row">
+      <div class="col s12">
+        <div class="section center-align">
+          <h4>Observaciones generales</h4>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="row">
+
+      <!-- Subtitulo de la seccion -->
+      <div class="col s12">
+        <blockquote>Capture las observaciones generales del caso</blockquote>
+      </div>
+
+      <!-- Observaciones -->
+      <div class="input-field col s12">
+        <label for="observaciones">Observaciones y/o sugerencias</label>
+        <textarea id="observaciones" class="materialize-textarea validate" maxlength="200"
+          oninput="this.value = this.value.toUpperCase()" formControlName="observacionesControl"></textarea>
+      </div>
+
+      <!-- Toma de foto -->
+      <div class="col s12">
+        <div class="section">
+          <blockquote>Toma de fotografia del rostro de la persona migrante</blockquote>
+        </div>
+        <a class="waves-effect waves-light btn modal-trigger azul-oim" href="#modalWebcam">
+          <i class="material-icons left">camera_alt</i>Fotografia
+        </a>
+      </div>
+
+    </div>
+
+    <!-- === FIN OBSERVACIONES GENERALES === -->
+
+    <div class="row">
+      <!-- Boton submit -->
+      <br>
+      <div class="col s12 right-align">
+        <button type="submit" class="btn waves-effect waves-light azul-oim"
+          [disabled]="!this.formDatosGenerales.valid">Guardar <i class="material-icons right">save</i></button>
+      </div>
+      <br>
+    </div>
+
+  </form>
+
+</div>
+
+<br>
+<br>
+
+<!-- ### Modales ### -->
+
+<!-- INICIO: Modal carta de atencion -->
+<div id="modalCartaAtencion" class="modal">
+  <div class="modal-content">
+
+    <h4>Carta de atención</h4>
+    <object data="assets/pdf/cartaAtencion.pdf" type="application/pdf" width="100%" height="100%" class="pdf">
+      <p>El navegador no soporta la lectura de PDF</p>
+      <br>
+      <a class="btn" href="assets/pdf/cartaAtencion.pdf">Descarga el PDF</a>
+    </object>
+
+  </div>
+  <div class="modal-footer">
+    <button class="modal-close waves-effect btn red">Cerrar</button>
+  </div>
+</div>
+<!-- FIN: Modal carta de atencion -->
+
+
+<!-- INICIO: Modal aviso de privacidad -->
+<div id="modalAvisoPrivacidad" class="modal">
+  <div class="modal-content">
+
+    <h4>Aviso de privacidad</h4>
+    <object data="assets/pdf/avisoPrivacidad.pdf" type="application/pdf" width="100%" height="100%" class="pdf">
+      <p>El navegador no soporta la lectura de PDF</p>
+      <br>
+      <a class="btn" href="assets/pdf/avisoPrivacidad.pdf">Descarga el PDF</a>
+    </object>
+
+  </div>
+  <div class="modal-footer">
+    <button class="modal-close waves-effect btn red">Cerrar</button>
+  </div>
+</div>
+<!-- FIN: Modal aviso de privacidad -->
+
+
+<!-- INICIO: Modal codigo de conducta -->
+<div id="modalCodigoConducta" class="modal">
+  <div class="modal-content">
+
+    <h4>Código de conducta</h4>
+    <object data="assets/pdf/codigoConducta.pdf" type="application/pdf" width="100%" height="100%" class="pdf">
+      <p>El navegador no soporta la lectura de PDF</p>
+      <br>
+      <a class="btn" href="assets/pdf/codigoConducta.pdf">Descarga el PDF</a>
+    </object>
+
+  </div>
+  <div class="modal-footer">
+    <button class="modal-close waves-effect btn red">Cerrar</button>
+  </div>
+</div>
+<!-- FIN: Modal codigo de conducta -->
+
+<!-- INICIO: Modal carta de webcam -->
+<div id="modalWebcam" class="modal">
+  <div class="modal-content">
+
+    <h4>Toma de fotografia</h4>
+    <!-- Aqui va la webcam -->
+    <div class="row">
+      <div class="col s12 center">
+        <br>
+        <button class="waves-effect waves-light btn azul-oim" (click)="toggleWebcam();">Encender camara<i
+            class="material-icons right">power_settings_new</i></button>
+        <span>&nbsp;&nbsp;</span>
+        <button class="waves-effect waves-light btn azul-oim" (click)="triggerSnapshot();"
+          [disabled]="this.showWebcam == false">Tomar foto<i class="material-icons right">camera</i></button>
+        <br>
+      </div>
+      <div class="col s12 m6 center">
+        <br>
+        <webcam [width]="250" [height]="200" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+          *ngIf="showWebcam" [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+          [imageQuality]="1" (cameraSwitched)="cameraWasSwitched($event)" (initError)="handleInitError($event)">
+        </webcam>
+      </div>
+      <div class="col s12 m6">
+        <br>
+        <div class="snapshot" *ngIf="webcamImage">
+          <img width="250" [src]="webcamImage.imageAsDataUrl" />
+        </div>
+      </div>
+
+      <div class="col s12">
+        <h4 *ngIf="errors.length > 0">Messages:</h4>
+        <ul *ngFor="let error of errors">
+          <li>{{error | json}}</li>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button class="modal-close waves-effect waves-light btn red" (click)="cerrarModal()">Cerrar</button>
+    <span>&nbsp;&nbsp;</span>
+    <button class="modal-close waves-effect waves-light btn azul-oim" (click)="guardarFoto()"
+      [disabled]="this.webcamImage == null">Guardar foto</button>
+  </div>
+</div>
+<!-- FIN: Modal carta de webcam -->
+
+<!-- <div>
+  <p>
+    {{ this.formDatosGenerales.getRawValue() | json }}
+  </p>
+</div> -->

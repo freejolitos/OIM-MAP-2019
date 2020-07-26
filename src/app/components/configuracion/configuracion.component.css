@@ -1,0 +1,23 @@
+input.ng-dirty.ng-invalid {
+    color: red
+}
+
+input.ng-valid[required],
+.ng-valid.required {
+    border-bottom: 1px solid #0033A0;
+    /* green */
+    box-shadow: 0 1px 0 0 #0033A0;
+    /* black */
+
+}
+
+input.ng-invalid:not(form) {
+    border-bottom: 1px solid #a94442;
+    /* red */
+    box-shadow: 0 1px 0 0 #a94442;
+    /* black */
+}
+
+sup {
+    color: red;
+}

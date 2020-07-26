@@ -1,0 +1,325 @@
+<div class="container row">
+  <div class="section center-align col s12">
+    <h4>Información general del caso con id: {{this.idFolio}}</h4>
+  </div>
+
+  <div class="col s12">
+    <div class="divider"></div>
+    <br>
+  </div>
+
+  <div class="col s12 right-align">
+    <a class="btn waves-effect waves-light modal-trigger azul-oim" href="#modalImprimir"><i
+        class="material-icons right">local_printshop</i>Imprimir folio</a>
+    <span>&nbsp;&nbsp;</span>
+    <a class="btn waves-effect waves-light azul-oim" (click)="nextStep()"><i
+        class="material-icons right">send</i>Continuar</a>
+  </div>
+
+  <div class="col s12">
+    <Blockquote>Datos generales</Blockquote>
+  </div>
+
+  <div class="col s12">
+    <div class="divider"></div>
+  </div>
+
+  <div class="col s12 center-align">
+    <!-- Tabla con los datos generales -->
+    <table class="highlight responsive-table">
+      <thead>
+        <th>Fecha captura</th>
+        <th>Fase</th>
+        <th>Nombre completo</th>
+        <th>Fecha de nacimiento</th>
+        <th>Nacionalidad</th>
+        <th>Departamento</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of impresionFolio">
+          <td>{{item.timestamp}}</td>
+          <td><strong>{{item.fase}}</strong></td>
+          <td>{{item.nombresControl}} {{item.apellidoPaternoControl}} {{item.apellidoMaternoControl}}</td>
+          <td>{{item.fechaNacimientoControl}}</td>
+          <td>{{item.nacionalidadControl}}</td>
+          <td>{{item.departamentoControl}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s12 center-align">
+    <br>
+    <div class="divider"></div>
+  </div>
+  <div class="col s12">
+    <table class="highlight responsive-table">
+      <thead>
+        <th>Genero</th>
+        <th>Condición migratoria actual</th>
+        <th>Condición migratoria a tramitar</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of impresionFolio">
+          <td>{{item.radioGeneroControl}}</td>
+          <td>{{item.condicionMigratoriaControl}}</td>
+          <td>{{item.condicionMigratoriaTramiteControl}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s12">
+    <br>
+    <div class="divider"></div>
+  </div>
+  <div class="col s12 center-align">
+    <table class="highlight responsive-table">
+      <thead>
+        <th>Documentos que se deben obtener para realizar su solicitud ante el INM</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of impresionFolio">
+          <td>{{item.listadoDocumentosControl}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s12">
+    <div class="divider"></div>
+  </div>
+  <div *ngIf="this.impFoto" class="col s12 center-align">
+    <table class="highlight responsive-table">
+      <thead>
+        <th>Foto de la persona migrante</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of impresionFolio">
+          <td> <img width="250" [src]="item.fotoControl" alt="foto"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s12">
+    <div class="divider"></div>
+    <br>
+  </div>
+</div>
+<div *ngIf="this.boolRevisionGestionDoc" class="container row">
+  <div class="col s12">
+    <blockquote>Datos de la revisión de documentos</blockquote>
+  </div>
+  <div class="col s12">
+    <br>
+    <div class="divider"></div>
+    <br>
+  </div>
+  <div class="col s12">
+    <table class="highlight responsive-table">
+      <thead>
+        <th>Fecha revision documentos</th>
+        <th>¿Reunió los documentos?</th>
+        <th>¿Obtuvo una resolución migratoria?</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of revisionGestDoc">
+          <td>{{item.timestamp}}</td>
+          <td>{{item.radioReunioDocumentosControl}}</td>
+          <td>{{item.radioResolucionMigratoriaControl}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s12">
+    <br>
+    <div class="divider"></div>
+    <br>
+  </div>
+</div>
+
+<div *ngIf="this.boolInsercionLaboral" class="container row">
+  <div class="col s12">
+    <blockquote>Datos de la inserción laboral</blockquote>
+  </div>
+  <div class="col s12">
+    <br>
+    <div class="divider"></div>
+    <br>
+  </div>
+  <div class="col s12">
+    <table class="highlight responsive-table">
+      <thead>
+        <th>Fecha insercion laboral</th>
+        <th>¿Participó en la platica informativa?</th>
+        <th>¿Fue canalizado a alguna instancia pública o privada?</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of insercionLabo">
+          <td>{{item.timestamp}}</td>
+          <td>{{item.radioPlaticaInformativaControl}}</td>
+          <td>{{item.radioCanalizadoControl}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s12">
+    <br>
+    <div class="divider"></div>
+    <br>
+  </div>
+  <div class="col s12">
+    <table class="highlight responsive-table">
+      <thead>
+        <th>¿Encontró trabajo?</th>
+        <th>¿Obtuvo documentación?</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of insercionLabo">
+          <td>{{item.radioEncontroTrabajoControl}}</td>
+          <td>{{item.radioObtuvoDocumentosControl}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s12">
+    <br>
+    <div class="divider"></div>
+    <br>
+  </div>
+  <div class="col s12">
+    <table class="highlight responsive-table">
+      <thead>
+        <th>Observaciones finales</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of insercionLabo">
+          <td>{{item.observacionesFinalesControl}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s12">
+    <br>
+    <div class="divider"></div>
+    <br>
+  </div>
+</div>
+
+<div class="container row">
+  <div class="col s12 right-align">
+    <br>
+    <a class="waves-effect waves-light btn modal-trigger azul-oim" href="#modalSeguimiento">Nueva nota</a>
+    <br>
+  </div>
+  <div class="col s12">
+    <br>
+    <div class="divider"></div>
+  </div>
+  <div class="col s12">
+    <h5>Notas de seguimiento</h5>
+    <table class="striped responsive-table">
+      <thead>
+        <th>Fecha</th>
+        <th>Nota de seguimiento</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of notasSeguimiento">
+          <td>{{ item.timestamp }}</td>
+          <td>{{ item.notaSeguimientoControl }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s12">
+    <br>
+    <div class="divider"></div>
+    <br>
+  </div>
+</div>
+
+<!-- Modal para la impresion del folio -->
+<div id="modalImprimir" class="modal">
+  <div class="modal-content" id="aImprimir">
+    <div class="card">
+      <div class="row">
+        <div class="col s12 center-align">
+          <h6>MODELO DE AUTONOMÍA PROGRESIVA PARA PERSONAS MIGRANTES</h6>
+          <br>
+          <div class="divider"></div>
+        </div>
+        <div class="col s12">
+          <table class="highlight responsive-table" id="tbImprimir1">
+            <thead>
+              <th>Nombre de la persona migrante:</th>
+              <th>Día de atencion:</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of impresionFolio">
+                <td>{{item.nombresControl}}</td>
+                <td>{{item.timestamp}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col s12">
+          <br>
+          <div class="divider"></div>
+        </div>
+        <div class="col s12">
+          <table class="highlight responsive-table" id="tbImprimir2">
+            <thead>
+              <th>Condición migratoria que solicitará:</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of impresionFolio">
+                <td>{{item.condicionMigratoriaTramiteControl}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col s12">
+          <br>
+          <div class="divider"></div>
+        </div>
+        <div class="col s12">
+          <table class="highlight responsive-table" id="tbImprimir3">
+            <thead>
+              <th>Documentos que se deben obtener para realizar su solicitud ante el INM:</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of impresionFolio">
+                <td>{{item.listadoDocumentosControl}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="editor"></div>
+  <div class="modal-footer">
+    <button class="btn waves-effect waves-light azul-oim" (click)="createPDFFolio()">Imprimir</button>
+    <span>&nbsp;&nbsp;</span>
+    <a class="modal-close waves-effect waves-green btn red">Cerrar</a>
+  </div>
+</div>
+
+
+
+<div class="modal" id="modalSeguimiento">
+  <div class="modal-content">
+    <h4>Nota de seguimiento</h4>
+    <form [formGroup]="formSeguimiento" (ngSubmit)="submitForm()">
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="notaSeguimiento">Nota de seguimiento:</label>
+          <textarea name="notaSeguimiento" id="notaSeguimiento" class="materialize-textarea" maxlength="200"
+            oninput="this.value = this.value.toUpperCase()" formControlName="notaSeguimientoControl"></textarea>
+        </div>
+        <div class="col s12 right-align">
+          <button [disabled]="!this.formSeguimiento.valid" type="submit"
+            class="modal-close waves-effect waves-green btn azul-oim">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

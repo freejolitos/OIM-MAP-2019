@@ -1,0 +1,40 @@
+.parallax-container {
+    min-height: 380px;
+    line-height: 0;
+    height: auto;
+    color: rgba(255, 255, 255, .9);
+  }
+  
+  .parallax-container .section {
+    width: 100%;
+  }
+    
+  .centered-text-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .activatorimg{
+    /* height: 200px; */
+    width: 200px;
+    position: absolute; 
+    z-index: 3;
+    opacity: 1;
+  }
+  .citaimg{
+    background: linear-gradient(to right, rgba(190,22,34,1), rgba(243,146,0,1));
+  }
+  .histoimg{
+    background: linear-gradient(to right, rgba(243,146,0,1), rgba(252,234,16,1));
+  }
+  .monitoreoimg{
+    background: linear-gradient(to right, rgba(222, 220, 16,1), rgba(58, 170, 53,1));
+  }
+  .infoimg{
+    background: linear-gradient(to right, rgba(47, 172, 102,1), rgba(0, 161, 154,1));
+  }
+  .configimg{
+    background: linear-gradient(to right, rgba(47, 172, 102,1), rgba(0, 161, 154,1));
+  }

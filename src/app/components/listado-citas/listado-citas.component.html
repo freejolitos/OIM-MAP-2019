@@ -1,0 +1,48 @@
+<!-- Titulo de la página -->
+<div class="container">
+  <div class="section center-align">
+    <h3>Listado de citas</h3>
+  </div>
+</div>
+
+<!-- Espaciador -->
+<div class="divider"></div>
+
+<!-- Inicio boton de alta de usuarios -->
+<div class="container">
+  <div class="row">
+    <div class="col s12 right-align">
+      <br>
+      <a routerLink="/Citas" class="waves-effect waves-light btn azul-oim">Nueva cita</a>
+      <br>
+    </div>
+  </div>
+</div>
+<!-- Fin boton de alta de usuarios -->
+
+<div class="divider"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+      <table class="striped">
+        <thead>
+          <th>Folio</th>
+          <th>Fecha de atencion</th>
+          <th>Nombre completo</th>
+          <th>Atendido por</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listadoCitas">
+            <td>{{ item.folioCitasControl }}</td>
+            <td>{{ item.fechaAtencionControl }}</td>
+            <td>{{ item.nombreCompletoControl }}</td>
+            <td>{{ item.atendidoPorControl }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<!-- Barra de navegación -->
+<div *ngIf="this.rutaActual != '/Login'" class="navbar-fixed">
+  <nav class="azul-oim">
+    <div class="container">
+      <div class="nav-wrapper">
+        <!-- Menu de la aplicacion (Solo se muestra en rutas que no son home) -->
+        <a *ngIf="this.rutaActual != '/Home'" data-target="menuPagina" class="sidenav-trigger show-on-large" href="#"><i
+            class="material-icons">menu</i></a>
+        <a *ngIf="this.rutaActual == '/Home'" data-target="enHome" class="sidenav-trigger show-on-large" href="#"><i
+            class="material-icons">menu</i></a>
+        <!-- El titulo de la aplicacion regresa al usuario al home -->
+        <a routerLink="/Home" (click)="closeConn()" class="brand-logo center truncate hide-on-small-and-down">MODELO DE
+          AUTONOMÍA PROGRESIVA</a>
+      </div>
+    </div>
+  </nav>
+</div>
+<!-- Menu de la pagina (boton de hamburguesa) -->
+<ul class="sidenav" id="menuPagina">
+  <li>
+    <div class="user-view">
+      <div class="background azul-oim"></div>
+      <span class="grey-text text-lighten-5">
+        <h5>Bienvenido</h5>
+        <span class="name">{{currentUser.username}}</span>
+      </span>
+      <br>
+    </div>
+  </li>
+  <li><a (click)="conHome()" class="btn-flat waves-effect waves-light"><i class="material-icons">home</i>Inicio</a></li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li><a (click)="conCitas()" class="btn-flat waves-effect waves-light"><i
+        class="material-icons">perm_contact_calendar</i>Citas</a></li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li><a (click)="conInicio()" class="btn-flat waves-effect waves-light"><i class="material-icons">history</i>Historial de
+      atención</a></li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li><a (click)="conMonitoreo()" class="btn-flat waves-effect waves-light"><i
+        class="material-icons">pageview</i>Monitoreo</a></li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li><a (click)="conInformacion()" class="btn-flat waves-effect waves-light"><i class="material-icons">info</i>Información
+      general</a></li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li><a (click)="conConfiguracion()" class="btn-flat waves-effect waves-light"><i
+        class="material-icons">settings_applications</i>Configuración</a></li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li><a (click)="conLogin()" class="btn-flat waves-effect waves-light"><i class="material-icons">directions_run</i>Cerrar sesión</a>
+  </li>
+</ul>
+<!-- Menu de la pagina (boton de hamburguesa) -->
+<ul class="sidenav" id="enHome">
+  <li>
+    <div class="user-view">
+      <div class="background azul-oim"></div>
+      <span class="grey-text text-lighten-5">
+        <h5>Bienvenido</h5>
+        <h6>{{currentUser.username}}</h6>
+      </span>
+      <br>
+    </div>
+  </li>
+  <li><a (click)="conLogin()" class="btn-flat waves-effect waves-light"><i class="material-icons">directions_run</i>Cerrar sesión</a>
+  </li>
+</ul>
+
+<!-- Aqui inicia el container donde se van a mostrar los componentes -->
+
+<router-outlet></router-outlet>
+
+
+<!-- <div>
+  <p>valor: {{ this.rutaActual }}</p>
+</div> -->

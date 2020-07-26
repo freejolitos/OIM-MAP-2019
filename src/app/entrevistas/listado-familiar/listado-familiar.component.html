@@ -1,0 +1,88 @@
+<!-- Titulo de la página -->
+<div class="container">
+  <div class="section center-align">
+    <h3>Listado de casos familiares</h3>
+  </div>
+</div>
+
+<!-- Espaciador -->
+<div class="divider"></div>
+
+<!-- Inicio boton de alta de usuarios -->
+<div class="container">
+  <div class="row section">
+    <form [formGroup]="formFiltrado" (ngSubmit)="submitFiltrado()">
+      <div class="input-field col s6 m3">
+        <label for="filtradoFamilia">Identificador de la familia:</label>
+        <input type="text" name="filtradoFamilia" id="filtradoFamilia" maxlength="50"
+          oninput="this.value = this.value.toUpperCase()" formControlName="filtradoFamiliaControl" required>
+        <span class="helper-text">Escriba una fraccion del identificador</span>
+      </div>
+      <div class="col s6 m3">
+        <br>
+        <button [disabled]="!this.formFiltrado.valid" type="submit"
+          class="btn waves-effect waves-light azul-oim">Buscar</button>
+      </div>
+    </form>
+    <div class="col s12 m6 right-align">
+      <br>
+      <a class="waves-effect waves-light btn modal-trigger azul-oim" href="#modalNuevaFamilia">Nuevo caso familiar</a>
+    </div>
+  </div>
+</div>
+<!-- Fin boton de alta de usuarios -->
+
+<div class="divider"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+      <!-- Inicio de la tabla -->
+      <table class="striped responsive-table">
+        <!-- Header de la tabla -->
+        <thead>
+          <th>Folio Familia</th>
+          <th>Fecha Captura</th>
+          <th>Identificado Familia</th>
+          <th>Acciones</th>
+        </thead>
+        <!-- Cuerpo de la tabla -->
+        <tbody>
+          <tr *ngFor="let item of listadoFamiliar">
+            <td>{{ item.idFolioFamilia }}</td>
+            <td>{{ item.timestamp }}</td>
+            <td>{{ item.identificadorFamilia }}</td>
+            <td><a (click)="closeConn(item.idFolioFamilia)" class="btn-flat waves-effect waves-light"><i
+                  class="material-icons">create</i></a></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="modalNuevaFamilia">
+  <div class="modal-content">
+    <h4>Alta de folio familiar</h4>
+    <form [formGroup]="formNuevaFamilia" (ngSubmit)="submitForm()">
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="identificadorFamilia">Identificador de la familia:</label>
+          <input type="text" name="identificadorFamilia" id="identificadorFamilia" maxlength="50"
+            oninput="this.value = this.value.toUpperCase()" formControlName="identificadorFamilia" required>
+        </div>
+        <div class="col s12 right-align">
+          <button [disabled]="!this.formNuevaFamilia.valid" type="submit"
+            class="modal-close waves-effect waves-green btn azul-oim">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <a class="modal-close waves-effect waves-green btn red">Cerrar</a>
+  </div>
+</div>

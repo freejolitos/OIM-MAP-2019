@@ -1,0 +1,52 @@
+input.ng-dirty.ng-invalid {
+    color: red
+}
+
+input.ng-valid[required],
+.ng-valid.required {
+    border-bottom: 1px solid #0033A0;
+    /* green */
+    box-shadow: 0 1px 0 0 #0033A0;
+    /* black */
+
+}
+
+input.ng-invalid:not(form) {
+    border-bottom: 1px solid #a94442;
+    /* red */
+    box-shadow: 0 1px 0 0 #a94442;
+    /* black */
+}
+
+sup {
+    color: red;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: #0033A0;
+}
+
+/* icon prefix focus color */
+.input-field .prefix {
+    color: #0033A0;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #0033A0;
+    box-shadow: 0 1px 0 0 #0033A0;
+}
+
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid #0033A0;
+    box-shadow: 0 1px 0 0 #0033A0;
+}
+
+
+.footer {
+    position: fixed !important;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}

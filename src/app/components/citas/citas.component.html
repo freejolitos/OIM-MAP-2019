@@ -1,0 +1,90 @@
+<!-- Titulo de la seccion -->
+<div class="container">
+  <div class="section center-align">
+    <h4>Sistema de citas</h4>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="container">
+
+  <form [formGroup]="formCitas" (ngSubmit)="submitForm()">
+
+    <div class="row">
+
+      <!-- Subtitulo de la seccion -->
+      <div class="col s12">
+        <blockquote>Capture la información de la cita.</blockquote>
+      </div>
+
+      <!-- Fecha entrada estacion -->
+      <div class="input-field col s12 m6">
+        <label for="fechaAtencion" class="active">Fecha de atención<sup> *</sup></label>
+        <input type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
+          data-inputmask-showMaskOnHover="false" class="validate" name="fechaAtencion" id="fechaAtencion"
+          formControlName="fechaAtencionControl">
+        <span class="helper-text">Formato dd/mm/aaaa</span>
+      </div>
+
+      <!-- Lugar de atencion -->
+      <div class="input-field col s12 m6">
+        <label for="lugarAtencion" class="active">Lugar de atención<sup> *</sup></label>
+        <select name="lugarAtencion" id="lugarAtencion" class="validate" formControlName="lugarAtencionControl"
+          required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of catEntidades" [value]="item.id">{{item.estado}}</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Nombre completo -->
+      <div class="input-field col s12">
+        <label for="nombreCompleto">Nombre completo<sup> *</sup></label>
+        <input type="text" name="nombreCompleto" id="nombreCompleto" class="validate" maxlength="100"
+          oninput="this.value = this.value.toUpperCase()" formControlName="nombreCompletoControl" required>
+        <span class="helper-text">Escriba el nombre completo de la persona migrante</span>
+      </div>
+
+      <!-- Lugar de atencion -->
+      <div class="input-field col s12 m6">
+        <label for="motivoOrientacion" class="active">Motivo principal de orientación<sup> *</sup></label>
+        <select name="motivoOrientacion" id="motivoOrientacion" class="validate"
+          formControlName="motivoOrientacionControl" required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of catOrientacion" [value]="item.id">{{item.motivo}}</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Otro motivo de atencion -->
+      <div [hidden]="this.formCitas.controls.motivoOrientacionControl.value != 5" class="input-field col s12 m6">
+        <label for="otroMotivo">Otro:</label>
+        <input type="text" name="otroMotivo" id="otroMotivo" class="validate" maxlength="50"
+          oninput="this.value = this.value.toUpperCase()" formControlName="otroMotivoControl">
+        <span class="helper-text">Especifique cual es el otro motivo</span>
+      </div>
+    
+      <!-- Atendido por: -->
+      <div class="input-field col s12">
+        <label for="atendidoPor">Atendido por:<sup> *</sup></label>
+        <input type="text" name="atendidoPor" id="atendidoPor" class="validate" maxlength="100"
+          oninput="this.value = this.value.toUpperCase()" formControlName="atendidoPorControl" required>
+      </div>
+
+      <div class="col s12">
+        <br>
+      </div>
+      <!-- Boton submit -->
+      <br>
+      <div class="col s12 right-align">
+        <button type="submit" class="btn waves-effect waves-light azul-oim" [disabled]="!this.formCitas.valid">
+          Siguiente <i class="material-icons right">send</i>
+        </button>
+      </div>
+      <br>
+
+    </div>
+  </form>
+
+</div>

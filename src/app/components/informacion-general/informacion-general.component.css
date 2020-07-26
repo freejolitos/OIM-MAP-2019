@@ -1,0 +1,24 @@
+img.imagenOpaca {
+    -webkit-filter: brightness(50%);
+    /* Safari 6.0 - 9.0 */
+    filter: brightness(50%);
+}
+
+object.pdf {
+    min-height: 400px;
+}
+.fila1{
+    background: linear-gradient(to right, rgba(190, 22, 34,1), rgba(243, 146, 0,1));
+}
+.fila2{
+    background: linear-gradient(to right, rgba(243, 146, 0,1), rgba(252, 234, 16,1));
+}
+.fila3{
+    background: linear-gradient(to right, rgba(222, 220, 16,1), rgba(58, 170, 53,1));
+}
+.fila4{
+    background: linear-gradient(to right, rgba(47, 172, 102,1), rgba(0, 161, 154,1));
+}
+.fila5{
+    background: linear-gradient(to right, rgba(29, 113, 184,1), rgba(45, 46, 131,1));
+}

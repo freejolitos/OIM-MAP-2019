@@ -1,0 +1,141 @@
+<!-- Titulo de la seccion -->
+<div class="container">
+  <div class="section center-align">
+    <h4>Sección única</h4>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Formulario seccion unica -->
+<div class="container">
+  <form [formGroup]="formSeccionUnicaFam" (ngSubmit)="submitForm()">
+
+    <div class="row">
+
+      <!-- Subtitulo seccion -->
+      <div class="col s12">
+        <blockquote>Captura de informacion con fines estadisticos</blockquote>
+      </div>
+
+      <!-- Nombre Completo -->
+      <div class="input-field col s12 m6">
+        <label for="nombreCompleto">Nombre completo<sup> *</sup></label>
+        <input type="text" name="nombreCompleto" id="nombreCompleto" class="validate" maxlength="100"
+          oninput="this.value = this.value.toUpperCase()" formControlName="nombreCompletoControl" required>
+        <span class="helper-text">Escriba el nombre completo</span>
+      </div>
+
+      <!-- Nacionalidad-->
+      <div class="input-field col s12 m6">
+        <label for="nacionalidad" class="active">Nacionalidad<sup> *</sup></label>
+        <select name="nacionalidad" id="nacionalidad" class="validate" formControlName="nacionalidadControl" required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of paises" [value]="item.id">{{item.pais}}</option>
+        </select>
+        <span class="helper-text">País de nacimiento</span>
+      </div>
+
+      <!-- Fecha de nacimiento -->
+      <div class="input-field col s12 m6">
+        <label for="fechaNacimiento">Fecha de nacimiento<sup> *</sup></label>
+        <input type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
+          data-inputmask-showMaskOnHover="false" class="validate" name="fechaNacimiento" id="fechaNacimiento"
+          formControlName="fechaNacimientoControl" (blur)="eventEdad()" required>
+        <span class="helper-text">Formato dd/mm/aaaa</span>
+      </div>
+
+      <!-- Edad -->
+      <div class="input-field col s12 m6">
+        <label for="edad" id="labelEdad">Edad<sup> *</sup></label>
+        <input type="text" name="edad" id="edad" class="validate" formControlName="edadControl" required>
+        <span class="helper-text">Edad de la persona migrante</span>
+      </div>
+
+      <!-- Genero -->
+      <div class="col s12">
+        <br>
+        <span class="grey-text">Género:<sup> *</sup></span>
+      </div>
+
+      <div class="col s12 m3">
+        <p>
+          <label>
+            <input value="1" type="radio" formControlName="radioGeneroControl" />
+            <span>Masculino</span>
+          </label>
+        </p>
+      </div>
+
+      <div class="col s12 m3">
+        <p>
+          <label>
+            <input value="2" type="radio" formControlName="radioGeneroControl" />
+            <span>Femenino</span>
+          </label>
+        </p>
+      </div>
+
+      <div class="col s12 m3">
+        <p>
+          <label>
+            <input value="3" type="radio" formControlName="radioGeneroControl" />
+            <span>Sin respuesta</span>
+          </label>
+        </p>
+      </div>
+
+      <div class="col s12">
+        <br>
+      </div>
+
+      <!-- Parentesco-->
+      <div class="input-field col s12 m6">
+        <label for="parentesco" class="active">Parentesco<sup> *</sup></label>
+        <select name="parentesco" id="parentesco" class="validate" formControlName="parentescoControl" required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of parentesco" [value]="item.id">{{item.parentesco}}</option>
+        </select>
+        <span class="helper-text">Seleccione una opcion</span>
+      </div>
+
+      <!-- Otro -->
+      <div [hidden]="this.formSeccionUnicaFam.controls.parentescoControl.value != 5" class="input-field col s12 m6">
+        <label for="otro">Otro parentesco:</label>
+        <input type="text" name="otro" id="otro" class="validate" maxlength="50"
+          oninput="this.value = this.value.toUpperCase()" formControlName="otroControl">
+        <span class="helper-text">Escriba el parentesco</span>
+      </div>
+
+      <!-- Condicion migraotria -->
+      <div class="input-field col s12">
+        <label for="condicionMigratoria" class="active">¿Qué condición migratoria va a solicitar?<sup>
+            *</sup></label>
+        <select name="condicionMigratoria" id="condicionMigratoria" class="validate"
+          formControlName="condicionMigratoriaControl" required>
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of tramite" [value]="item.id">{{item.tramite}}</option>
+        </select>
+        <span class="helper-text">Seleccione la condicion migratoria</span>
+      </div>
+
+      <!-- Observaciones -->
+      <div class="input-field col s12">
+        <label for="observaciones">Observaciones finales a considerar</label>
+        <textarea name="observaciones" id="observaciones" class="materialize-textarea" maxlength="200"
+          oninput="this.value = this.value.toUpperCase()" formControlName="observacionesControl"></textarea>
+      </div>
+
+      <!-- Boton submit -->
+      <br>
+      <div class="col s12 right-align">
+        <button type="submit" class="btn waves-effect waves-light azul-oim" [disabled]="!this.formSeccionUnicaFam.valid">
+          Finalizar <i class="material-icons right">send</i>
+        </button>
+      </div>
+      <br>
+
+    </div>
+
+  </form>
+</div>

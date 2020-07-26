@@ -1,0 +1,1241 @@
+<!-- Titulo de la seccion -->
+<div class="container">
+  <div class="section center-align">
+    <h4>Monitoreo</h4>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- INICIO FORMULARIO FILTRADO -->
+<div class="container section row">
+
+  <form [formGroup]="formFiltrado" (ngSubmit)="submitFiltrado()">
+
+    <div class="input-field col s12 m4">
+      <label for="fecha1">Fecha inicial:</label>
+      <input type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
+        data-inputmask-showMaskOnHover="false" class="validate" id="fecha1" name="fecha1"
+        formControlName="fecha1Control" required>
+    </div>
+
+    <div class="input-field col s12 m4">
+      <label for="fecha1">Fecha final:</label>
+      <input type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
+        data-inputmask-showMaskOnHover="false" class="validate" id="fecha2" name="fecha2"
+        formControlName="fecha2Control" required>
+    </div>
+
+    <div class="col s12 m4 right-align">
+      <br>
+      <button [disabled]="!this.formFiltrado.valid" type="submit"
+        class="btn waves-effect waves-light azul-oim">Filtrar<i class="material-icons left">find_in_page</i></button>
+    </div>
+
+  </form>
+
+  <!-- <div class="col s12">
+    {{this.formFiltrado.value | json}}
+  </div> -->
+
+</div>
+<!-- FIN FORMULARIO FILTRADO -->
+
+<div class="divider"></div>
+<br>
+<div class="container row section">
+  <h5 class="center-align">Entrevista Adultos</h5>
+  <h6 class="center-align">Considera adultos individuales y en casos familiares</h6>
+</div>
+
+<!-- ADULTOS -->
+<div class="container">
+  <ul class="collapsible popout">
+
+    <!-- RECIBIDO ATENCION -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">accessibility</i>¿Ha recibido atención en alguna
+        ventanilla informativa
+        anteriormente?</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Recibido atencion -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaRecibidoAtencion" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Respuesta</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of recibidoAtencionData">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grafica Recibido atencion-->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaRecibidoAtencion" baseChart [data]="pieChartData_RecibidoAtencion"
+                  [labels]="pieChartLabels_RecibidoAtencion" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaRecibidoAtencion', 'tablaRecibidoAtencion', '¿Ha recibido atención en alguna ventanilla informativa anteriormente?')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- RESPUESTA GENERO -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">nature_people</i>Respuesta "Género"</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla genero -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaGeneroAdulto" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Género</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaGeneroAdulto">
+                      <td>{{ item.genero }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grafica Respuesta Genero Adulto -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaGeneroAdulto" baseChart [data]="pieChartData_RespuestaGeneroAdulto"
+                  [labels]="pieChartLabels_RespuestaGeneroAdulto" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button (click)="generaGraficaPDF('graficaGeneroAdulto', 'tablaGeneroAdulto', 'Respuesta Género')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- NACIONALIDAD -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">person_pin</i>Respuesta "Nacionalidad"</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Nacionalidad Adulto -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <table id="tablaNacionalidadAdulto" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Nacionalidad</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of nacionalidadAdulto">
+                      <td>{{ item.nacionalidad }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica Nacionalidad -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <canvas id="graficaNacionalidadAdulto" baseChart [data]="pieChartData_NacionalidadAdulto"
+                  [labels]="pieChartLabels_NacionalidadAdulto" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaNacionalidadAdulto', 'tablaNacionalidadAdulto', 'Respuesta Nacionalidad')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- Pasa algo raro con este PDF se debe revisar-->
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- LEER y ESCRIBIR -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">subject</i>¿Sabe leer y escribir?</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta sabe leer-->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaAlfabetismoAdulto" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Respuesta</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaLeerAdulto">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica sabe leer -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaAlfabetismoAdulto" baseChart [data]="pieChartData_LeerAdulto"
+                  [labels]="pieChartLabels_LeerAdulto" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaAlfabetismoAdulto', 'tablaAlfabetismoAdulto', 'Respuesta Alfabetismo')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- ESTADO CIVIL -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">account_box</i>Respuesta "Estado civil"</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta estado civil-->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <table id="tablaEdoCivil" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Estado Civil</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaEstadoCivil">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica estado civil -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <canvas id="graficaEdoCivil" baseChart [data]="pieChartData_EdoCivil" [labels]="pieChartLabels_EdoCivil"
+                  [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors"
+                  [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button (click)="generaGraficaPDF('graficaEdoCivil', 'tablaEdoCivil', 'Respuesta Estado Civil')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- IDIOMA NATIVO -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">forum</i>Respuesta "Idioma nativo"</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta idioma nativo -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <table id="tablaIdiomaAdulto" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Idioma</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaIdioma">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica idioma -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <canvas id="graficaIdiomaAdulto" baseChart [data]="pieChartData_Idioma" [labels]="pieChartLabels_Idioma"
+                  [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors"
+                  [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button (click)="generaGraficaPDF('graficaIdiomaAdulto', 'tablaIdiomaAdulto', 'Idioma nativo')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- ORIENTACION SEXUAL -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">insert_emoticon</i>Respuesta "Orientación sexual"</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta orientacion sexual -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <table id="tablaPrefSex" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Orientación</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaOrientacionSexual">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica orientacion sexual -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <canvas id="graficaPrefSex" baseChart [data]="pieChartData_OrientacionSexual"
+                  [labels]="pieChartLabels_OrientacionSexual" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button (click)="generaGraficaPDF('graficaPrefSex', 'tablaPrefSex', 'Orientación Sexual')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- MEDIO DE INGRESO -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">motorcycle</i>Respuesta "Medio de ingreso a México"
+      </div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta medio ingreso -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaMedIngreMex" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Medio de ingreso</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaMedioIngreso">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica medio ingreso -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaMedIngreMex" baseChart [data]="pieChartData_MedioIngreso"
+                  [labels]="pieChartLabels_MedioIngreso" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button (click)="generaGraficaPDF('graficaMedIngreMex', 'tablaMedIngreMex', 'Medio de ingreso a México')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- CUANTAS VECES -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">change_history</i>¿Cuántas veces ha estado en México?
+      </div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta cuantas veces -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <table id="tablaVisitMex" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Estancias en México</th>
+                      <th>Respuestas</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaCuantasVeces">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica cuantas veces -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <canvas id="graficaVisitMex" baseChart [data]="pieChartData_CuantasVeces"
+                  [labels]="pieChartLabels_CuantasVeces" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button (click)="generaGraficaPDF('graficaVisitMex', 'tablaVisitMex', 'Estancias previas en México')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- RECHAZO AEROPUERTO -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">airplanemode_inactive</i>¿Ha sido rechazado en un
+        aeropuerto?</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta rechazo aeropuerto -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaRechaAero" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Respuesta</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaRechazoAeropuerto">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica rechazo aeropuerto -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaRechaAero" baseChart [data]="pieChartData_RechazoAeropuerto"
+                  [labels]="pieChartLabels_RechazoAeropuerto" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button (click)="generaGraficaPDF('graficaRechaAero', 'tablaRechaAero', 'Rechazos en Aeropuertos')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- ESTACION MIGRATORIA -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">access_time</i>¿Ha estado en una estación migratoria?
+      </div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta estacion migratoria -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaEstanciaMig" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Respuesta</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaEstacionMigratoria">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica estacion migratoria -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaEstanciaMig" baseChart [data]="pieChartData_EstacionMigratoria"
+                  [labels]="pieChartLabels_EstacionMigratoria" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaEstanciaMig', 'tablaEstanciaMig', 'Estancias en Estaciones Migratorias')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- CONDICION MIGRATORIA -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">device_hub</i>¿Qué condición migratoria tiene?</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta condicion migratoria -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaCondMig" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Condición</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaCondicionMigratoria">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica condicion migratoria -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaCondMig" baseChart [data]="pieChartData_CondicionMigratoria"
+                  [labels]="pieChartLabels_CondicionMigratoria" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button (click)="generaGraficaPDF('graficaCondMig', 'tablaCondMig', 'Condicion Migratoria Actual')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- CONDICION MIGRATORIA ESPECIFICA -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">gps_not_fixed</i>Respuesta "Condicion migratoria
+        específica"</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta condicion migratoria especifica -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <table id="tablaCondMigEsp" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Condición específica</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaCondicionMigratoriaEspecifica">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica condicion migratoria especifica -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <canvas id="graficaCondMigEsp" baseChart [data]="pieChartData_CondicionMigratoriaEspecifica"
+                  [labels]="pieChartLabels_CondicionMigratoriaEspecifica" [chartType]="pieChartType"
+                  [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaCondMigEsp', 'tablaCondMigEsp', 'Condicion Migratoria Específica')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+
+        </div>
+      </div>
+    </li>
+
+    <!-- CONDICION MIGRATORIA TRAMITE -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">assignment_turned_in</i>¿Qué condición migratoria
+        solicitará ante el INM?</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta condicion migratoria tramite -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <table id="tablaTramMigSol" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Condición Solicitada</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaCondicionMigratoriaTramite">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Graficacion condicion migratoria tramite -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <canvas id="graficaTramMigSol" baseChart [data]="pieChartData_CondicionMigratoriaTramite"
+                  [labels]="pieChartLabels_CondicionMigratoriaTramite" [chartType]="pieChartType"
+                  [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaTramMigSol', 'tablaTramMigSol', 'Condición Migratoria a solicitar ante INM')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+
+        </div>
+      </div>
+    </li>
+
+    <!-- RECIBIO CANALIZACION -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">account_balance</i>¿Se realizó canalización u
+        orientación con el consulado?</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla repuesta recibio canalizacion -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaContactConsul" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Respuesta</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaRecibioCanalizacion">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica recibio canalizacion -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaContactConsul" baseChart [data]="pieChartData_RecibioCanalizacion"
+                  [labels]="pieChartLabels_RecibioCanalizacion" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaContactConsul', 'tablaContactConsul', 'Se dio canalización u orientación')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+
+        </div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<div class="divider"></div>
+<br>
+<div class="container row section">
+  <h5 class="center-align">Casos familiares</h5>
+</div>
+
+<!-- FAMILIARES -->
+<div class="container">
+  <ul class="collapsible popout">
+
+    <!-- DISTRIBUCION CASOS ADULTO -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">group_work</i>Distribucion de casos "Adultos"</div>
+      <div class="collapsible-body">
+        <div class="row">
+          <!-- Tabla distribucion casos adulto -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaDistribAdult" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Tipo de caso</th>
+                      <th>Totales</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaDistribucionCasosAdulto">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Grafica distribucion casos adulto -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaDistribAdult" baseChart [data]="pieChartData_DistribucionCasosAdulto"
+                  [labels]="pieChartLabels_DistribucionCasosAdulto" [chartType]="pieChartType"
+                  [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaDistribAdult', 'tablaDistribAdult', 'Distribución de Adultos en casos Familiares sobre Individuales')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+    <!-- DISTRIBUCION TOTALES FAMILIA -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">view_column</i>Distribucion de los casos familiares
+      </div>
+      <div class="collapsible-body">
+        <div class="row">
+          <!-- Tabla distribucion totales famialia -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaDistFolFam" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Tipo de caso</th>
+                      <th>Totales</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaDistribucionTotalesFamilia">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Grafica distribucion totales familia -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaDistFolFam" baseChart [data]="pieChartData_DistribucionTotalesFamilia"
+                  [labels]="pieChartLabels_DistribucionTotalesFamilia" [chartType]="pieChartType"
+                  [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaDistFolFam', 'tablaDistFolFam', 'Distribución menores contra adultos en casos familiares')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+        </div>
+      </div>
+    </li>
+
+
+  </ul>
+</div>
+
+<div class="divider"></div>
+<br>
+<div class="container row section">
+  <h5 class="center-align">Niños, niñas y adolecentes no acompañados</h5>
+</div>
+
+<!-- NNA NA -->
+<div class="container">
+  <ul class="collapsible popout">
+
+    <!-- NACIONALIDAD -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">person_pin</i>Respuesta "Nacionalidad"</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Nacionalidad Adulto -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <table id="tablaNacionalidadNNANA" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Nacionalidad</th>
+                      <th>Totales</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of respuestaNacionalidadMenorNA">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greafica Nacionalidad -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <canvas id="graficaNacionalidadNNANA" baseChart [data]="pieChartData_NacionalidadMenorNA"
+                  [labels]="pieChartLabels_NacionalidadMenorNA" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaNacionalidadNNANA', 'tablaNacionalidadNNANA', 'Nacionalidad de los menores no acompañados')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+
+        </div>
+      </div>
+    </li>
+
+    <!-- RESPUESTA GENERO -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">nature_people</i>Respuesta "Género"</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla genero -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <table id="tablaGeneroNNANA" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Género</th>
+                      <th>Totales</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of generoMenorNA">
+                      <td>{{ item.respuesta }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grafica Respuesta Genero -->
+          <div class="col s12 m6">
+            <div class="card small">
+              <div class="card-content">
+                <canvas id="graficaGeneroNNANA" baseChart [data]="pieChartData_GeneroMenorNA"
+                  [labels]="pieChartLabels_GeneroMenorNA" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="pieChartColors" [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaGeneroNNANA', 'tablaGeneroNNANA', 'Género de los menores no acompañados')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+
+        </div>
+      </div>
+    </li>
+
+    <!-- EDADES -->
+    <li>
+      <div class="collapsible-header"><i class="material-icons">assessment</i>Edades</div>
+      <div class="collapsible-body">
+        <div class="row">
+
+          <!-- Tabla edades -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <table id="tablaEdadesNNANA" class="highlight centered">
+                  <thead>
+                    <tr>
+                      <th>Edad</th>
+                      <th>Totales</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of edadesMenorNA">
+                      <td>{{ item.edad }}</td>
+                      <td>{{ item.totales }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grafica edades -->
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <div style="display: block">
+                  <canvas id="graficaEdadesNNANA" baseChart [datasets]="barChartData_EdadesMenorNA"
+                    [labels]="barChartLabels_EdadesMenorNA" [options]="barChartOptions" [plugins]="barChartPlugins"
+                    [legend]="barChartLegend" [chartType]="barChartType">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- INICIO Boton descarga -->
+          <div class="col s12 right-align">
+            <span>Descarga de gráfica</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              (click)="generaGraficaPDF('graficaEdadesNNANA', 'tablaEdadesNNANA', 'Edad de los menores no acompañados')"
+              class="btn waves-effect waves-light azul-oim">Exportar a PDF<i
+                class="material-icons left">aspect_ratio</i></button>
+          </div>
+          <!-- FIN Boton descarga -->
+
+        </div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<div class="divider"></div>
+<br>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col s12 section">
+      <h5 class="center-align">Descarga de base para reportería</h5>
+    </div>
+
+    <div class="col s12">
+      <div class="card hoverable">
+        <div class="card-content">
+          <span class="card-title">Descarga de información</span>
+          <p>Presione el botón y espere un momento para realizar la descarga de la totalidad de la base de datos en
+            archivos de CSV</p>
+        </div>
+        <div class="card-action indigo lighten-5">
+          <div class="row">
+            <div class="col s12">
+              <br>
+              <span>Descarga de datos de entrevistas a mayores de edad: &nbsp;&nbsp;</span>
+              <angular2csv id="btn-datosGen" [data]="this.varReporteDatosGenerales" filename="datosAdultos"
+                [options]="optionsReporteEntrevistaIndividual"></angular2csv>
+            </div>
+            <div class="col s12">
+              <br>
+              <span>Descarga NNA en casos familiares: &nbsp;&nbsp;</span>
+              <angular2csv id="btn-nnaFam" [data]="this.varReporteDatosMenorFam" filename="datosMenorFam"
+                [options]="optionsReporteDatosMenorFamiliar"></angular2csv>
+            </div>
+            <div class="col s12">
+              <br>
+              <span>Descarga de datos NNA no acompañados: &nbsp;&nbsp;</span>
+              <angular2csv id="btn-nna" [data]="this.varReporteDatosMenor" filename="datosMenorNA"
+                [options]="optionsReporteDatosMenor"></angular2csv>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+    <br>
+  </div>
+</div>

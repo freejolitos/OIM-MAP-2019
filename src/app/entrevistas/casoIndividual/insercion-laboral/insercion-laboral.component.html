@@ -1,0 +1,204 @@
+<!-- TREN DE ESTATUS -->
+<div class="container hide-on-med-and-down">
+  <div class="row">
+
+    <!-- DATOS GENERALES -->
+    <div class="col s4">
+      <div class="icon-block">
+        <h4 class="center indigo-text text-accent-3">
+          <i class="material-icons">face</i>
+        </h4>
+        <h6 class="center">Recepción y Valoración</h6>
+      </div>
+    </div>
+    <!-- REVISION Y GESTION DE DOCUMENTOS -->
+    <div class="col s4">
+      <div class="icon-block">
+        <h4 class="center indigo-text text-accent-3">
+          <i class="material-icons">folder</i>
+        </h4>
+        <h6 class="center">Revisión y gestión de documentos</h6>
+      </div>
+    </div>
+    <!-- INSERCION LABORAL -->
+    <div class="col s4">
+      <div class="icon-block">
+        <h4 class="center indigo-text text-accent-3">
+          <i class="material-icons">laptop_mac</i>
+        </h4>
+        <h6 class="center">Inserción laboral</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Titulo de la seccion -->
+<div class="container">
+  <div class="section center-align">
+    <h4>Inserción laboral</h4>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Formulario de insercion laboral -->
+<div class="container">
+  <form [formGroup]="formInsercionLaboral" (ngSubmit)="submitForm()">
+
+    <div class="row">
+
+      <!-- Subtitulo seccion -->
+      <div class="col s12">
+        <blockquote>Estos datos deberán ser registrados cuando la persona migrante tenga su condición migratoria y pueda insertarse en el área laboral.</blockquote>
+      </div>
+      
+      <!-- Obtuvo documentos -->
+      <div class="input-field col s12">
+        <label for="radioObtuvoDocumentos" class="active">¿Obtuvo sus documentos laborales?</label>
+        <select name="radioObtuvoDocumentos" id="radioObtuvoDocumentos" class="validate" formControlName="radioObtuvoDocumentosControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+      
+      <!-- Check RFC -->
+      <div [hidden]="this.formInsercionLaboral.controls.radioObtuvoDocumentosControl.value != 1" class="col s12 m6">
+        <p>
+          <label>
+            <input type="checkbox" id="checkRFC" formControlName="checkRFCControl" />
+            <span>RFC</span>
+          </label>
+        </p>
+      </div>
+      <div [hidden]="!this.formInsercionLaboral.controls.checkRFCControl.value" class="input-field col s12 m6">
+        <label for="RFC">RFC</label>
+        <input type="text" name="RFC" id="RFC" class="validate" oninput="this.value = this.value.toUpperCase()" formControlName="RFCControl">
+        <span class="helper-text">Captura el RFC</span>
+      </div>
+      
+      <!-- Check NSS -->
+      <div [hidden]="this.formInsercionLaboral.controls.radioObtuvoDocumentosControl.value != 1" class="col s12 m6">
+        <p>
+          <label>
+            <input type="checkbox" id="checkNSS" formControlName="checkNSSControl" />
+            <span>NSS</span>
+          </label>
+        </p>
+      </div>
+      <div [hidden]="!this.formInsercionLaboral.controls.checkNSSControl.value" class="input-field col s12 m6">
+        <label for="NSS">NSS</label>
+        <input type="text" name="NSS" id="NSS" class="validate" oninput="this.value = this.value.toUpperCase()" formControlName="NSSControl">
+        <span class="helper-text">Captura el NSS</span>
+      </div>
+      
+      <!-- Check otro -->
+      <div [hidden]="this.formInsercionLaboral.controls.radioObtuvoDocumentosControl.value != 1" class="col s12 m6">
+        <p>
+          <label>
+            <input type="checkbox" id="chekOtro" formControlName="checkf3OtroControl" />
+            <span>Otro</span>
+          </label>
+        </p>
+      </div>
+      <div [hidden]="!this.formInsercionLaboral.controls.checkf3OtroControl.value" class="input-field col s12 m6">
+        <label for="otro">Otro</label>
+        <input type="text" name="otro" id="otro" class="validate" oninput="this.value = this.value.toUpperCase()" formControlName="otroControl">
+        <span class="helper-text">Captura nombre del otro documento</span>
+      </div>
+      
+      <!-- ¿Por que? -->
+      <div [hidden]="this.formInsercionLaboral.controls.radioObtuvoDocumentosControl.value != 2" class="input-field col s12">
+        <label for="porque2">¿Por qué?</label>
+        <textarea type="text" id="porque2" class="materialize-textarea validate" maxlength="200" oninput="this.value = this.value.toUpperCase()" formControlName="porque2Control"></textarea>
+        <span class="helper-text">Escriba por qué no obtuvo los documentos</span>
+      </div>
+
+      <!-- Platica informativa -->
+      <div class="input-field col s12">
+        <label for="radioPlaticaInformativa" class="active">¿Participó en la plática informativa?</label>
+        <select name="radioPlaticaInformativa" id="radioPlaticaInformativa" class="validate"
+          formControlName="radioPlaticaInformativaControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Canalizado -->
+      <div class="input-field col s12">
+        <label for="radioCanalizado" class="active">¿Fue canalizado a alguna instancia pública o privada?</label>
+        <select name="radioCanalizado" id="radioCanalizado" class="validate" formControlName="radioCanalizadoControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Cual -->
+      <div [hidden]="this.formInsercionLaboral.controls.radioCanalizadoControl.value != 1" class="input-field col s12">
+        <label for="cual">¿Cual?</label>
+        <input type="text" name="cual" id="cual" class="validate" maxlength="50"
+          oninput="this.value = this.value.toUpperCase()" formControlName="cualf3Control">
+        <span class="helper-text">Escriba en cual instancia fue canalizado</span>
+      </div>
+
+      <!-- Trabajo -->
+      <div class="input-field col s12">
+        <label for="radioEncontroTrabajo" class="active">¿Encontró trabajo?</label>
+        <select name="radioEncontroTrabajo" id="radioEncontroTrabajo" class="validate"
+          formControlName="radioEncontroTrabajoControl">
+          <option value="0" disabled selected></option>
+          <option value="1">Sí</option>
+          <option value="2">No</option>
+        </select>
+        <span class="helper-text">Seleccione una respuesta</span>
+      </div>
+
+      <!-- Donde -->
+      <div [hidden]="this.formInsercionLaboral.controls.radioEncontroTrabajoControl.value != 1"
+        class="input-field col s12">
+        <label for="donde">¿Donde?</label>
+        <input type="text" name="donde" id="donde" class="validate" maxlength="50"
+          oninput="this.value = this.value.toUpperCase()" formControlName="dondeControl">
+        <span class="helper-text">Escriba donde entrontró Trabajo</span>
+      </div>
+
+      <!-- ¿Por que? -->
+      <div [hidden]="this.formInsercionLaboral.controls.radioEncontroTrabajoControl.value != 2"
+        class="input-field col s12">
+        <label for="porque">¿Por qué?</label>
+        <textarea type="text" id="porque" class="materialize-textarea validate" maxlength="200"
+          oninput="this.value = this.value.toUpperCase()" formControlName="porquef3Control"></textarea>
+        <span class="helper-text">Escriba por qué no encontró trabajo</span>
+      </div>
+
+      <!-- Observaciones -->
+      <div class="input-field col s12">
+        <label for="observacionesFinales">Observaciones finales</label>
+        <textarea id="observacionesFinales" class="materialize-textarea validate" maxlength="200"
+          oninput="this.value = this.value.toUpperCase()" formControlName="observacionesFinalesControl"></textarea>
+      </div>
+
+      <!-- Boton submit -->
+      <br>
+      <div class="col s12 right-align">
+        <button type="submit" class="btn waves-effect waves-light azul-oim" [disabled]="!this.formInsercionLaboral.valid">
+          Finalizar <i class="material-icons right">send</i>
+        </button>
+      </div>
+      <br>
+
+    </div>
+
+  </form>
+</div>
+
+<!-- <div>
+  <p>
+    valor {{ this.formInsercionLaboral.value | json }}
+  </p>
+</div> -->
