@@ -7,9 +7,9 @@ Las herramientas usadas para el desarrollo de este proyecto son:
 - TypeORM
 - SQLite
 
-Este proyecto esta basado en el código publicado por @CubikNeRubik en su repositorio [angular-electron-typeorm-starter](angular-electron-typeorm-starter)
+Este proyecto esta basado en el código publicado por @CubikNeRubik en su repositorio [angular-electron-typeorm-starter](https://github.com/CubikNeRubik/angular-electron-typeorm-starter)
 
-## Instrucciones de instalación
+## Instrucciones de uso
 
 1. Clonar respositorio
 2. Ejecutar `npm install` (No ejecutar actualización de paquetes **NO HACER npm update**, en caso de hacer update sera necesario realizar actualizaciones en el código)
