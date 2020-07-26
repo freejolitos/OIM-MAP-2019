@@ -16,7 +16,7 @@ Este proyecto se realizó usando Angular y Electron
 
 ## Licenciamiento 
 
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/License-MIT-green)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 
 ## Version actual
 
