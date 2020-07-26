@@ -20,7 +20,7 @@ Este proyecto se realizó usando Angular y Electron
 
 ## Version actual
 
-[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/freejolitos/OIM-MAP-2019/releases/)
+[![GitHub release](https://img.shields.io/github/v/release/freejolitos/OIM-MAP-2019)](https://github.com/freejolitos/OIM-MAP-2019/releases/)
 
 
 ### Este es código hecho con amor por Hugo Legorreta y Arturo Jimenez =@ [Freejolitos](https://freejolitos.com)
