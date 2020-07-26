@@ -1,6 +1,13 @@
 # ELECTRON-PCR
 
-Este proyecto se realizó usando Angular y Electron
+Las herramientas usadas para el desarrollo de este proyecto son:
+
+- Electron
+- Angular
+- TypeORM
+- SQLite
+
+Este proyecto esta basado en el código publicado por @CubikNeRubik en su repositorio [angular-electron-typeorm-starter](angular-electron-typeorm-starter)
 
 ## Instrucciones de instalación
 
