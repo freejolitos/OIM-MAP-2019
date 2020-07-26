@@ -12,7 +12,7 @@ Este proyecto se realizó usando Angular y Electron
 
 ## Compilar portable para windows
 
-`npm electron:windows`
+`npm run electron:windows`
 
 
 ### Este es código hecho con amor por Hugo Legorreta y Arturo Jimenez =@ [Freejolitos](https://freejolitos.com)
