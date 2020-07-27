@@ -23,7 +23,7 @@ Este proyecto esta basado en el código publicado por @CubikNeRubik en su reposi
 
 ## Licenciamiento 
 
-[![GitHub license](https://img.shields.io/badge/License-MIT-green)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/License-MIT-green)](https://github.com/freejolitos/OIM-MAP-2019/blob/master/LICENSE)
 
 ## Version actual
 
